@@ -2,44 +2,28 @@ import Entity, { query } from "entitystorage";
 import User from "../../../models/user.mjs"
 
 export default class RedirLink extends Entity{
-  initNew({id, dest, owner}){
-    this.id = id
+  initNew({redir, dest}){
+    redir.rel(this, "link")
     this.dest = dest
-    this.rel(owner, "owner")
+    this.public = false
+    this.orderIdx = redir.links.reduce((max, cur) => Math.max(cur.orderIdx||0, max), 0) + 1;
     this.tag("redirlink")
   }
 
   static lookup(id){
     if(!id) return null;
-    return query.type(RedirLink).tag("redirlink").prop("id", id).first
-  }
-
-  static all(){
-    return query.type(RedirLink).tag("redirlink").all
-  }
-
-  static allByUser(owner){
-    return query.type(RedirLink).tag("redirlink").relatedTo(owner, "owner").all
-  }
-
-  owner(){
-    return User.from(this.related.owner)
-  }
-
-  static createId(id){
-    return id.replace(/^\s+|\s+$/g, '') // trim
-             .toLowerCase()
-             .replace(/\//g, '-') //Replace / with -
-             .replace(/[^a-z0-9 -]/g, '') // remove invalid chars
-             .replace(/\s+/g, '-') // collapse whitespace and replace by -
-             .replace(/-+/g, '-'); // collapse dashes
+    return query.type(RedirLink).tag("redirlink").id(id).first
   }
 
   toObj(){
     return {
-      id: this.id,
+      id: this._id,
+      public: !!this.public,
       dest: this.dest,
-      owner: this.owner()?.toObjSimple() || null
+      role: this.related.role?.id||null,
+      permission: this.related.permission?.id||null,
+      user: this.related.user?.id||null,
+      orderIdx: this.orderIdx||this._id
     }
   }
 }

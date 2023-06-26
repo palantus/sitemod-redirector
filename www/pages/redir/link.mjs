@@ -1,4 +1,4 @@
-const elementName = 'sample-page'
+const elementName = 'redir-l-page'
 
 import api from "/system/api.mjs"
 import {state} from "/system/core.mjs"
@@ -9,12 +9,12 @@ template.innerHTML = ``;
 class Element extends HTMLElement {
   connectedCallback() {
     let pageId = /\/l\/([a-zA-Z0-9\-]+)/.exec(state().path)?.[1]
-    api.get(`redir/${pageId}`).then(redir => {
-      if(!redir){
+    api.get(`redir/${pageId}/link`).then(({link}) => {
+      if(!link){
         alert("Invalid redirection")
         setTimeout(() => window.location = "/", 5000)
       }
-      window.location = redir.dest
+      window.location = link
     })
   }
 }
