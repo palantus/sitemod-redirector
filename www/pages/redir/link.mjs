@@ -1,7 +1,7 @@
 const elementName = 'redir-l-page'
 
 import api from "/system/api.mjs"
-import {state} from "/system/core.mjs"
+import {state, goto} from "/system/core.mjs"
 
 const template = document.createElement('template');
 template.innerHTML = ``;
@@ -13,8 +13,12 @@ class Element extends HTMLElement {
       if(!link){
         alert("Invalid redirection")
         setTimeout(() => window.location = "/", 5000)
+        return;
       }
-      window.location = link
+      if(link.startsWith("/"))
+        goto(link)
+      else
+        window.location = link
     })
   }
 }
