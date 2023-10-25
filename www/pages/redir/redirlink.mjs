@@ -1,11 +1,11 @@
 const elementName = 'redirlink-page'
 
-import api from "/system/api.mjs"
-import "/components/field-ref.mjs"
-import "/components/field-edit-inline.mjs"
-import "/components/field-list.mjs"
-import {on, off} from "/system/events.mjs"
-import { getApiConfig, state } from "/system/core.mjs"
+import api from "../../system/api.mjs"
+import "../../components/field-ref.mjs"
+import "../../components/field-edit-inline.mjs"
+import "../../components/field-list.mjs"
+import {on, off} from "../../system/events.mjs"
+import { getApiConfig, state } from "../../system/core.mjs"
 
 
 const template = document.createElement('template');

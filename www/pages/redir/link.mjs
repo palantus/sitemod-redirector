@@ -1,7 +1,7 @@
 const elementName = 'redir-l-page'
 
-import api from "/system/api.mjs"
-import {state, goto} from "/system/core.mjs"
+import api from "../../system/api.mjs"
+import {state, goto} from "../../system/core.mjs"
 
 const template = document.createElement('template');
 template.innerHTML = ``;

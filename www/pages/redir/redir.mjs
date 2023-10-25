@@ -1,14 +1,14 @@
 const elementName = 'redir-page'
 
-import api from "/system/api.mjs"
-import "/components/action-bar.mjs"
-import "/components/action-bar-item.mjs"
-import "/components/field-ref.mjs"
-import "/components/field-edit-inline.mjs"
-import "/pages/redir/redirlink.mjs"
-import {on, off} from "/system/events.mjs"
-import { showDialog, confirmDialog } from "/components/dialog.mjs";
-import { getApiConfig } from "/system/core.mjs"
+import api from "../../system/api.mjs"
+import "../../components/action-bar.mjs"
+import "../../components/action-bar-item.mjs"
+import "../../components/field-ref.mjs"
+import "../../components/field-edit-inline.mjs"
+import "../../pages/redir/redirlink.mjs"
+import {on, off} from "../../system/events.mjs"
+import { showDialog, confirmDialog } from "../../components/dialog.mjs";
+import { getApiConfig } from "../../system/core.mjs"
 
 
 const template = document.createElement('template');
