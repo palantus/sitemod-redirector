@@ -5,13 +5,11 @@ import "../../components/field-ref.mjs"
 import "../../components/field-edit-inline.mjs"
 import "../../components/field-list.mjs"
 import {on, off} from "../../system/events.mjs"
-import { getApiConfig, state } from "../../system/core.mjs"
+import { getApiConfig, state, stylesheets } from "../../system/core.mjs"
 
 
 const template = document.createElement('template');
 template.innerHTML = `
-  <link rel='stylesheet' href='/css/global.css'>
-  <link rel='stylesheet' href='/css/searchresults.css'>
   <style>
     field-list{
       width: 500px;
@@ -60,7 +58,8 @@ class Element extends HTMLElement {
   constructor() {
     super();
 
-    this.attachShadow({ mode: 'open' });
+    this.attachShadow({ mode: 'open' })
+        .adoptedStyleSheets = [stylesheets.global, stylesheets.searchresults];
     this.shadowRoot.appendChild(template.content.cloneNode(true));
     this.refreshData = this.refreshData.bind(this);
     this.deleteLink = this.deleteLink.bind(this)
